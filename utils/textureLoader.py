@@ -28,7 +28,7 @@ class textureLoader(object):
         
         self.format = fourCC  
         
-        print "fourCC",fourCC
+        #print "fourCC",fourCC
         if(fourCC=="DXT1"):
             components = 3
             blockSize  = 8

@@ -31,8 +31,14 @@ class objLoader(object):
                 self.indices.extend(index)
                 index = map(int,items[3].split("/"))
                 self.indices.extend(index)
+            elif(items[0]=="s"):               
+                self.smooth = items[1] 
+            elif(items[0]=="mtllib"):   
+                self.referenceMaterials = items[1]
+            elif(items[0]=="usemtl"):   
+                self.Materials = items[1]
             else:
-                print "skip unknown line : %s"%line          
+                print "skip unknown line : %s"%line[0:-1]          
     def to_array_style(self):
         class Container(object):
             pass

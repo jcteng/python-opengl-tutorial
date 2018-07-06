@@ -33,33 +33,36 @@ class Shader(object):
     def initShader(self, vertex_shader_source_list, fragment_shader_source_list):
         # create program
         self.program= gl.glCreateProgram() # pylint: disable=E1111
-        print('create program')
+        #print('create program ',self.program)
         printOpenGLError()
 
         # vertex shader
-        print('compile vertex shader...')
+        #print('compile vertex shader...')
         self.vs = gl.glCreateShader(gl.GL_VERTEX_SHADER) # pylint: disable=E1111
         gl.glShaderSource(self.vs, vertex_shader_source_list)
         gl.glCompileShader(self.vs)
         if(gl.GL_TRUE!=gl.glGetShaderiv(self.vs, gl.GL_COMPILE_STATUS)):
-    	    print gl.glGetShaderInfoLog(self.vs)
+    	    err =  gl.glGetShaderInfoLog(self.vs) 
+            raise Exception(err)  
         gl.glAttachShader(self.program, self.vs)
         printOpenGLError()
 
         # fragment shader
-        print('compile fragment shader...')
+        #print('compile fragment shader...')
         self.fs = gl.glCreateShader(gl.GL_FRAGMENT_SHADER) # pylint: disable=E1111
         gl.glShaderSource(self.fs, fragment_shader_source_list)
         gl.glCompileShader(self.fs)
-        if(gl.GL_TRUE!=gl.glGetShaderiv(self.vs, gl.GL_COMPILE_STATUS)):
-    	    print gl.glGetShaderInfoLog(self.vs)        
+        if(gl.GL_TRUE!=gl.glGetShaderiv(self.fs, gl.GL_COMPILE_STATUS)):
+    	    err =  gl.glGetShaderInfoLog(self.fs) 
+            raise Exception(err)       
         gl.glAttachShader(self.program, self.fs)
         printOpenGLError()
 
-        print('link...')
+        #print('link...')
         gl.glLinkProgram(self.program)
         if(gl.GL_TRUE!=gl.glGetProgramiv(self.program, gl.GL_LINK_STATUS)):
-    	    print gl.glGetProgramInfoLog(self.program)          
+    	    err =  gl.glGetShaderInfoLog(self.vs) 
+            raise Exception(err)          
         printOpenGLError()
 
     def begin(self):

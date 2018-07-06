@@ -1,0 +1,13 @@
+# 介绍  
+
+这组代码参考 http://www.opengl-tutorial.org 教程的c代码流程，实现了一套基于PyOpenGL的python版本。所需的背景知识和教程内容可参考C版本的文字描述。在此处仅对在python环境下遇到的特殊问题和小技巧进行说明。
+
+# 索引
+
+0. tutorial 00： 基于glfw实现，提供了绘制mesh和着色的基本功能。OpenGL渲染使用了shader。
+
+1. tutorial 01: 与上一节完全相同的内容，使用gult作Windows实现替代原有的GLFW。后续的所有实现都用此实现为框架。
+
+2. tutorial 02: 演示加载纹理的python实现，支持DDS加载。由于使用了PILLOW读取图像，因此TGA，BMP,JPG，PNG等pillow支持的格式同时也被支持。
+
+3. 
