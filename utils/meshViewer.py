@@ -18,8 +18,8 @@ class MeshViewWindow(GlutWindow):
         glEnable(GL_DEPTH_TEST)
         #glEnable(GL_CULL_FACE)
 
-    def add_mesh(self,meshObj):
-        self.meshes.append(meshObj.makeContext())
+    def add_mesh(self,meshWithRender):
+        self.meshes.append(meshWithRender.makeContext())
 
     def init_context(self):        
         self.meshes = []
@@ -31,6 +31,8 @@ class MeshViewWindow(GlutWindow):
             self.controller.resize(width,height)        
         self._MVP = self.controller.calcMVP(glm.mat4(1.0)) 
         self.MVPPtr = glm.value_ptr(self._MVP)
+        self.ViewPtr = glm.value_ptr(self.controller.ViewMatrix)
+        self.ProjectionPtr = glm.value_ptr(self.controller.ProjectionMatrix)
 
     def resize(self,Width,Height):  
         print "resize"      
@@ -42,7 +44,8 @@ class MeshViewWindow(GlutWindow):
         self.calc_MVP()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         for mesh in self.meshes:
-            mesh.rendering(self.MVPPtr)
+            mesh.rendering(self.MVPPtr,self.ViewPtr,self.ProjectionPtr)
+            
     def processMenuEvents(self,*args,**kwargs):
         action, = args
 
@@ -89,6 +92,6 @@ class meshWithRender(object):
         self.texture = None
         print "No texture for this object"
     
-    def rendering(self):
+    def rendering(self,MVPptr,ViewPtr,ProjectionPtr):
         print "override rendering process"
         pass

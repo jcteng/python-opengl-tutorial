@@ -62,7 +62,7 @@ class MVPControl:
         self.ScreenWidth = width
         self.ScreenHeight = height
         self.computeMatrices()
-
+    
     def calcMVP(self,modelMaterix):
 
         #print self.position

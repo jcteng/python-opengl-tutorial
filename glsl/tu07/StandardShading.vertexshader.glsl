@@ -41,3 +41,4 @@ void main(){
 	// UV of the vertex. No special space for this one.
 	UV = vertexUV;
 }
+
