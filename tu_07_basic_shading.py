@@ -34,7 +34,7 @@ class basicShading(meshWithRender):
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,self.vertexbuffer)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,len(model.vertexs)*4,(GLfloat * len(model.vertexs))(*model.vertexs),GL_STATIC_DRAW)
 
-
+        # used normal here
         self.normalbuffer  = glGenBuffers(1)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,self.normalbuffer)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,len(model.normals)*4,(GLfloat * len(model.normals))(*model.normals),GL_STATIC_DRAW)
