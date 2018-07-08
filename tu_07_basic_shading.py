@@ -18,7 +18,7 @@ class basicShading(meshWithRender):
     def loadShader(self):
         self.shader = Shader()
         self.shader.initShaderFromGLSL(
-            ["glsl/tu08/StandardShading.vertexshader.glsl"], ["glsl/tu08/StandardShading.fragmentshader.glsl"])
+            ["glsl/tu07/StandardShading.vertexshader.glsl"], ["glsl/tu07/StandardShading.fragmentshader.glsl"])
         self.MVP_ID = glGetUniformLocation(self.shader.program, "MVP")
         self.ModelMatrix_ID = glGetUniformLocation(self.shader.program, "M")
         self.ViewMatrix_ID = glGetUniformLocation(self.shader.program, "V")
@@ -34,7 +34,7 @@ class basicShading(meshWithRender):
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,self.vertexbuffer)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,len(model.vertexs)*4,(GLfloat * len(model.vertexs))(*model.vertexs),GL_STATIC_DRAW)
 
-        # used normal here
+        # used normal
         self.normalbuffer  = glGenBuffers(1)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,self.normalbuffer)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,len(model.normals)*4,(GLfloat * len(model.normals))(*model.normals),GL_STATIC_DRAW)
@@ -97,12 +97,13 @@ class basicShading(meshWithRender):
         glDisableVertexAttribArray(0)
         glDisableVertexAttribArray(1)
         glDisableVertexAttribArray(1)
-        self.shader.end()        
+     
 
-
+from tu_06_multobjs import meshFromObj
 if __name__ == "__main__":
 
     win = MeshViewWindow().init_default()    
+    win.add_mesh(meshFromObj(meshName="resources/tu04/suzanne.obj",textureName="resources/tu04/uvmap.dds",location=[0.0,3.0,0.0]))    
     win.add_mesh(basicShading(meshName="resources/tu04/suzanne.obj",textureName="resources/tu04/uvmap.dds"))
 
     win.run()
