@@ -25,7 +25,7 @@ class AlphaShading(basicShading):
         self.ViewMatrix_ID = glGetUniformLocation(self.shader.program, "V")
         self.Texture_ID =  glGetUniformLocation(self.shader.program, "myTextureSampler")
         self.Light_ID =  glGetUniformLocation(self.shader.program, "LightPosition_worldspace")
-
+        self.OFFSET_ID = glGetUniformLocation(self.shader.program, "LOCATION_OFFSET")
 
 class AlphaEnabledWin(MeshViewWindow):
     def init_opengl(self):

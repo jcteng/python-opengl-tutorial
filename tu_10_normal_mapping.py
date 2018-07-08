@@ -252,6 +252,7 @@ from tu_07_basic_shading import basicShading
 from tu_06_multobjs import meshFromObj
 if __name__ == "__main__":
     win = MeshViewWindow().init_default()  
+    
     win.add_mesh(NormalMapping(meshName="resources/tu10/cylinder.obj",textureName=["resources/tu10/diffuse.DDS","resources/tu10/normal.bmp","resources/tu10/specular.DDS"]))
 
     win.add_mesh(basicShading(meshName="resources/tu10/cylinder.obj",textureName="resources/tu10/diffuse.DDS",location=[0,0,3]))
