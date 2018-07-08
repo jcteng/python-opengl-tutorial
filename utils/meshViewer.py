@@ -30,9 +30,9 @@ class MeshViewWindow(GlutWindow):
         if(width!=0):
             self.controller.resize(width,height)        
         self._MVP = self.controller.calcMVP(glm.mat4(1.0)) 
-        self.MVPPtr = glm.value_ptr(self._MVP)
-        self.ViewPtr = glm.value_ptr(self.controller.ViewMatrix)
-        self.ProjectionPtr = glm.value_ptr(self.controller.ProjectionMatrix)
+        # self.MVPPtr = glm.value_ptr(self._MVP)
+        # self.ViewPtr = glm.value_ptr(self.controller.ViewMatrix)
+        # self.ProjectionPtr = glm.value_ptr(self.controller.ProjectionMatrix)
 
     def resize(self,Width,Height):  
         print "resize"      
@@ -44,7 +44,7 @@ class MeshViewWindow(GlutWindow):
         self.calc_MVP()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         for mesh in self.meshes:
-            mesh.rendering(self.MVPPtr,self.ViewPtr,self.ProjectionPtr)
+            mesh.rendering(self._MVP ,self.controller.ViewMatrix,self.controller.ProjectionMatrix)
             
     def processMenuEvents(self,*args,**kwargs):
         action, = args

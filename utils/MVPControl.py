@@ -15,10 +15,11 @@ class MVPControl:
         #Initial position : on +Z
         self.position = glm.vec3(5,5,5)
         #Initial horizontal angle : toward -Z
-        self.horizontalAngle = 4
+        self.XAngle = 4
         #Initial vertical angle : none
-        self.verticalAngle = - 0.6
+        self.YAngle = - 0.6
         # Initial Field of View
+        self.ZAngle = 0.0
         self.Fov = 60.0
         self.computeMatrices()
 
@@ -32,21 +33,21 @@ class MVPControl:
         self.position += self.right*right 
         self.computeMatrices()  
     def lookUpward(self,yaw):
-        self.verticalAngle += yaw
+        self.YAngle += yaw
         self.computeMatrices()  
     def turn(self,angle):
-        self.horizontalAngle += angle
+        self.XAngle += angle
         self.computeMatrices()  
     #calc direction right and up
     def computeMatrices(self):
-        self.direction = glm.vec3(math.cos(self.verticalAngle) * math.sin(self.horizontalAngle), 
-                        math.sin(self.verticalAngle),
-                        math.cos(self.verticalAngle) * math.cos(self.horizontalAngle)
+        self.direction = glm.vec3(math.cos(self.YAngle) * math.sin(self.XAngle), 
+                        math.sin(self.YAngle),
+                        math.cos(self.YAngle) * math.cos(self.XAngle)
                         )
         self.right =  glm.vec3(
-            math.sin(self.horizontalAngle - 3.14/2.0), 
+            math.sin(self.XAngle - 3.14/2.0), 
             0.0,
-            math.cos(self.horizontalAngle - 3.14/2.0 )
+            math.cos(self.XAngle - 3.14/2.0 )
             )
         self.up = glm.cross(self.right,self.direction)
 
@@ -66,7 +67,7 @@ class MVPControl:
     def calcMVP(self,modelMaterix):
 
         #print self.position
-        #print self.horizontalAngle,self.verticalAngle
+        #print self.XAngle,self.YAngle
         return self.ProjectionMatrix * self.ViewMatrix * modelMaterix                                  
 
 def dummyUpdate():

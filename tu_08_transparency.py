@@ -29,9 +29,8 @@ class AlphaShading(basicShading):
 
 class AlphaEnabledWin(MeshViewWindow):
     def init_opengl(self):
-        glClearColor(0.1, 0.1, 0.1, 0.8)
-        glDepthFunc(GL_LESS)
-        glEnable(GL_DEPTH_TEST)
+        MeshViewWindow.init_opengl(self)
+        
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 

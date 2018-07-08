@@ -63,9 +63,9 @@ class basicShading(meshWithRender):
 
     def rendering(self, MVP,View,Projection):
         self.shader.begin()
-        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE,MVP)               
+        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE, glm.value_ptr(MVP))
         glUniformMatrix4fv(self.ModelMatrix_ID,1,GL_FALSE,glm.value_ptr(glm.mat4(1.0)))   
-        glUniformMatrix4fv(self.ViewMatrix_ID,1,GL_FALSE,View)     
+        glUniformMatrix4fv(self.ViewMatrix_ID,1,GL_FALSE,glm.value_ptr(View))     
 
         lightPos = glm.vec3(4.0,4.0,4.0)
         glUniform3f(self.Light_ID, lightPos.x, lightPos.y, lightPos.z)

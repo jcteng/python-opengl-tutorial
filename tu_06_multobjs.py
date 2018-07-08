@@ -7,7 +7,7 @@ from OpenGL.GL import *  # pylint: disable=W0614
 from utils.meshViewer import MeshViewWindow, meshWithRender
 from utils.shaderLoader import Shader
 
-
+import glm
 class meshFromArray(meshWithRender):
 
     def __init__(self, vertex_array, color_array):
@@ -38,7 +38,7 @@ class meshFromArray(meshWithRender):
     def rendering(self, MVP,View,Projection):
 
         self.shader.begin()
-        glUniformMatrix4fv(self.MVP_ID, 1, GL_FALSE, MVP)
+        glUniformMatrix4fv(self.MVP_ID, 1, GL_FALSE,  glm.value_ptr(MVP)  )
 
         glEnableVertexAttribArray(0)
         glBindBuffer(GL_ARRAY_BUFFER, self.vertexbuffer)
@@ -102,7 +102,7 @@ class meshFromObj(meshWithRender):
 
     def rendering(self, MVP,View,Projection):
         self.shader.begin()
-        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE,MVP)        
+        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE, glm.value_ptr(MVP)        )
         glUniform3f(self.OFFSET_ID,self.location[0],self.location[1],self.location[2])
 
         glActiveTexture(GL_TEXTURE0)
@@ -129,7 +129,7 @@ class meshFromObj(meshWithRender):
         glDisableVertexAttribArray(0)
         glDisableVertexAttribArray(1)
         self.shader.end()        
-from tu_01_shader_color_cube import g_vertex_buffer_data, g_color_buffer_data
+from tu_01_color_cube import g_vertex_buffer_data, g_color_buffer_data
 if __name__ == "__main__":
 
     win = MeshViewWindow().init_default()    

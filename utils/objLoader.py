@@ -56,6 +56,9 @@ class objLoader(object):
             outobj.normals.extend(self.normals[index:index+3])
 
         return outobj
+
+
+
     def to_single_index_style(self):
         class Container(object):
             pass                

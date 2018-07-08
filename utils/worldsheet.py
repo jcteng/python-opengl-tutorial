@@ -38,9 +38,9 @@ class worldSheet(meshWithRender):
         self.texture = None
         #print "No texture for this object"
     
-    def rendering(self,MVPptr,ViewPtr,ProjectionPtr):
+    def rendering(self,MVP,View,Projection):
         self.shader.begin()
-        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE,MVPptr)
+        glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE,glm.value_ptr(MVP))
         glEnableVertexAttribArray(0)
         glBindBuffer(GL_ARRAY_BUFFER, self.linebuffer)
         glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,None)
