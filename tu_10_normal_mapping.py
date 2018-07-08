@@ -171,9 +171,9 @@ class NormalMapping(meshWithRender):
 
             model = self.model
             # if(DiffuseTexture.inversedVCoords):
-            #     for index in range(0,len(model.texcoords)):
-            #         if(index % 2):
-            #             model.texcoords[index] = 1.0 - model.texcoords[index]
+            for index in range(0,len(model.texcoords)):
+                if(index % 2):
+                    model.texcoords[index] = 1.0 - model.texcoords[index]
 
             self.DiffuseTexture = DiffuseTexture.textureGLID
             self.NormalTexture = NormalTexture.textureGLID
@@ -187,7 +187,7 @@ class NormalMapping(meshWithRender):
         ModelMatrix = glm.mat4(1.0)
         #print View
         ModelViewMatrix = glm.mat4(View)*ModelMatrix
-        print ModelViewMatrix
+
         ModelView3x3Matrix = glm.mat3(ModelViewMatrix)        
         glUniformMatrix4fv(self.MatrixID,1,GL_FALSE, glm.value_ptr(MVP)     )          
         glUniformMatrix4fv(self.ModelMatrixID,1,GL_FALSE,glm.value_ptr(ModelMatrix))   
@@ -247,8 +247,15 @@ class NormalMapping(meshWithRender):
         glDisableVertexAttribArray(3)
         glDisableVertexAttribArray(4)
 
+
+from tu_07_basic_shading import basicShading
+from tu_06_multobjs import meshFromObj
 if __name__ == "__main__":
     win = MeshViewWindow().init_default()  
     win.add_mesh(NormalMapping(meshName="resources/tu10/cylinder.obj",textureName=["resources/tu10/diffuse.DDS","resources/tu10/normal.bmp","resources/tu10/specular.DDS"]))
+
+    win.add_mesh(basicShading(meshName="resources/tu10/cylinder.obj",textureName="resources/tu10/diffuse.DDS",location=[0,0,3]))
+
+    win.add_mesh(meshFromObj(meshName="resources/tu10/cylinder.obj",textureName="resources/tu10/diffuse.DDS",location=[3,0,0]))
 
     win.run()

@@ -11,10 +11,10 @@ import glm
 
 
 class basicShading(meshWithRender):
-    def __init__(self,meshName,textureName):
+    def __init__(self,meshName,textureName,location=[0.0,0.0,0.0]):
         self.meshName = meshName
         self.textureName = textureName
-
+        self.location = location
     def loadShader(self):
         self.shader = Shader()
         self.shader.initShaderFromGLSL(
@@ -24,7 +24,7 @@ class basicShading(meshWithRender):
         self.ViewMatrix_ID = glGetUniformLocation(self.shader.program, "V")
         self.Texture_ID =  glGetUniformLocation(self.shader.program, "myTextureSampler")
         self.Light_ID =  glGetUniformLocation(self.shader.program, "LightPosition_worldspace")
-
+        self.OFFSET_ID = glGetUniformLocation(self.shader.program, "LOCATION_OFFSET")
     def loadObject(self):
 
         from utils.objLoader import objLoader            
@@ -66,8 +66,9 @@ class basicShading(meshWithRender):
         glUniformMatrix4fv(self.MVP_ID,1,GL_FALSE, glm.value_ptr(MVP))
         glUniformMatrix4fv(self.ModelMatrix_ID,1,GL_FALSE,glm.value_ptr(glm.mat4(1.0)))   
         glUniformMatrix4fv(self.ViewMatrix_ID,1,GL_FALSE,glm.value_ptr(View))     
+        glUniform3f(self.OFFSET_ID,self.location[0],self.location[1],self.location[2])
 
-        lightPos = glm.vec3(4.0,4.0,4.0)
+        lightPos = glm.vec3(0.0,0.0,4.0)
         glUniform3f(self.Light_ID, lightPos.x, lightPos.y, lightPos.z)
 
         glActiveTexture(GL_TEXTURE0)
