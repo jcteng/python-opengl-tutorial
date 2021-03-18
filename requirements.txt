@@ -9,7 +9,7 @@ glfw==1.6.0
 isort==4.3.4
 lazy-object-proxy==1.3.1
 mccabe==0.6.1
-Pillow==6.3.0
+Pillow==8.1.1
 PyGLM==0.4.5b1
 pylint==1.9.2
 PyOpenGL==3.1.0
