@@ -45,7 +45,7 @@ class worldSheet(meshWithRender):
         glBindBuffer(GL_ARRAY_BUFFER, self.linebuffer)
         glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,None)
         
-        glDrawArrays(GL_LINES  , 0, len(self.lines)/3) # 12*3 indices starting at 0 -> 12 triangles 
+        glDrawArrays(GL_LINES  , 0, len(self.lines)) # 12*3 indices starting at 0 -> 12 triangles 
 
         glDisableVertexAttribArray(0)       
         self.shader.end()
